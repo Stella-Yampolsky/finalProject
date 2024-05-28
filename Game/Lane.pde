@@ -1,12 +1,10 @@
 class Lane{
   float x;
-  float noTouchY;
   float touchY;
   float label;
 }
-  Lane(float x, float nTY, float tY, float l){
+  Lane(float x, float tY, float l){
     this.x = x;
-    noTouchY = nTY;
     touchY = tY;
     label = l;
   }
@@ -14,9 +12,7 @@ class Lane{
   float getX(){
     return x;
   }
-  float getnTY(){
-    return noTouchY;
-  }
+
   float gettY(){
     return touchY;
   }
@@ -25,6 +21,7 @@ class Lane{
   }
   
   void display(){
-    //make 2 lines, one at x, one width/4 from x
+    line(width,height, width, 0 );
+    line(width + width/4,height, width + width/4, 0);
   }
     
