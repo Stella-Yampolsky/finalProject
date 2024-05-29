@@ -1,9 +1,10 @@
-class PCircle{
+class Circle{
   Lane lane;
   float y;
   float speed;
   
-  PCircle(Lane lane, float speed){
+  Circle(Lane lane, float speed){
+    y = 0;
     this.lane = lane;
     this.speed = speed;
   }
@@ -16,5 +17,6 @@ class PCircle{
     fill(#78ffeb);
     circle(lane.getX(), y, 50 );
   }
+}
   
   //don't need remove method, can apparently just remove from array

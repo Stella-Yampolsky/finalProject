@@ -1,27 +1,29 @@
 class Lane{
-  float x;
+  int x;
   float touchY;
-  float label;
-}
-  Lane(float x, float tY, float l){
+  int label;
+
+  Lane(int x, float tY, int l){
     this.x = x;
     touchY = tY;
     label = l;
   }
   
-  float getX(){
+  int getX(){
     return x;
   }
 
   float gettY(){
     return touchY;
   }
-  float getLabel(){
-    return label();
+  int getLabel(){
+    return label;
   }
   
   void display(){
+    stroke(1);
     line(width,height, width, 0 );
-    line(width + width/4,height, width + width/4, 0);
+    line(width + label * (width/4),height, width + label * (width/4), 0);
+  }
   }
     
