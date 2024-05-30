@@ -22,8 +22,7 @@ class Lane{
   
   void display(){
     stroke(1);
-    line(width,height, width, 0 );
-    line(width + label * (width/4),height, width + label * (width/4), 0);
+    line(x + width/8, 0, x+width/8, height);
   }
   }
     
