@@ -4,6 +4,7 @@ float rate;
 float ticks;
 float r;
 float endZone = 600;
+int score;
 
 void setup() {
   size(1000, 800);
@@ -12,6 +13,7 @@ void setup() {
   l2 = new Lane(375, endZone, 2);
   l3 = new Lane(625, endZone, 3);
   l4 = new Lane(875, endZone, 4);
+  score = 0;
   rate = 60;
   ticks = 0;
 }
@@ -23,7 +25,10 @@ void draw() {
   l2.display();
   l3.display();
   l4.display();
-
+  textSize(50);
+  fill(1);
+  text("score:", 25, 50);
+  text( score, 150, 50);
   ticks++;
 
   if (ticks >= rate) {
@@ -50,5 +55,29 @@ void draw() {
     if (c.y > height) {
       Clist.remove(i);
     }
+  }
+}
+
+void keyPressed(){
+  int lane = key;
+  Lane l;
+  if (lane == 1){
+    l = l1;
+  }
+  else if(lane == 2){
+    l = l2;
+  }
+  else if(lane == 3){
+    l = l3;
+  }
+  else{
+    l = l4;
+  }
+  for(int i = Clist.size() - 1; i >= 0; i--){
+    Circle c = Clist.get(i);
+    if (c.lane == l && c.y >= l.touchY){
+      score += 200;
+    }
+    
   }
 }

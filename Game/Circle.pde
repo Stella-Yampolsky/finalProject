@@ -15,8 +15,13 @@ class Circle{
   
   void display(){
     fill(#78ffeb);
-    circle(lane.getX(), y, 50 );
+    circle(lane.getX(), y, 100 );
   }
-}
+  
+  boolean press(){
+   return y > lane.touchY;
+   }
+  }
+
   
   //don't need remove method, can apparently just remove from array
