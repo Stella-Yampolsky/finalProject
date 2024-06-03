@@ -3,32 +3,36 @@ Lane l1, l2, l3, l4;
 float rate;
 float ticks;
 float r;
-float endZone = 300;
+float endZone = 600;
+float endZoneE = 700;
 int score;
+boolean cont;
 
 void setup() {
   size(1000, 800);
   Clist = new ArrayList<Circle>();
-  l1 = new Lane(125, endZone, 1);
-  l2 = new Lane(375, endZone, 2);
-  l3 = new Lane(625, endZone, 3);
-  l4 = new Lane(875, endZone, 4);
+  l1 = new Lane(125, endZone, endZoneE, 1);
+  l2 = new Lane(375, endZone, endZoneE, 2);
+  l3 = new Lane(625, endZone, endZoneE, 3);
+  l4 = new Lane(875, endZone, endZoneE, 4);
   score = 0;
   rate = 60;
   ticks = 0;
+  cont = true;
 }
 
 void draw() {
+  if(cont){
   background(173, 216, 230);
   line(0, endZone, width, endZone);
+  line(0, endZoneE, width, endZoneE);
   l1.display();
   l2.display();
   l3.display();
   l4.display();
   textSize(50);
   fill(1);
-  text("score:", 25, 50);
-  text(score, 150, 50);
+  text("score:" + score, 25, 50);
   ticks++;
 
   if (ticks >= rate) {
@@ -53,10 +57,19 @@ void draw() {
       Clist.remove(i);
     }
   }
+  }
+  else{
+    background(1);
+    fill(#FF0000);
+    textSize(200);
+    text("Game Over", 25, 400);
+    textSize(50);
+    text("final score: " + score, 350, 450); 
+  }
 }
 
 void keyPressed() {
-  int lane = key - '0';  // Convert char to int
+  int lane = key - '0';  
   Lane l = null;
   if (lane == 1) {
     l = l1;
@@ -70,9 +83,13 @@ void keyPressed() {
   if (l != null) {
     for (int i = Clist.size() - 1; i >= 0; i--) {
       Circle c = Clist.get(i);
-      if (c.lane == l && c.y >= l.touchY) {
+      if (c.lane == l && c.y >= l.touchY && c.y <= l.touchYE) {
         score += 200;
-        Clist.remove(i);  // Remove the circle once scored
+        Clist.remove(i);
+        
+      }
+      else{
+        cont = false;
       }
     }
   }

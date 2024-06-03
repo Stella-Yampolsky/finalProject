@@ -1,11 +1,13 @@
 class Lane{
   int x;
   float touchY;
+  float touchYE;
   int label;
 
-  Lane(int x, float tY, int l){
+  Lane(int x, float tY, float tYE, int l){
     this.x = x;
     touchY = tY;
+    touchYE = tYE;
     label = l;
   }
   
