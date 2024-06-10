@@ -23,7 +23,7 @@ class Lane{
   }
   
   void display(){
-    stroke(1);
+    stroke(#9d32a8);
     line(x + width/8, 0, x+width/8, height);
   }
   }

@@ -40,15 +40,17 @@ void draw() {
     text("Press any key to start!", 55, 205);
   } else if (state == 1) {
     // Game screen
-    background(173, 216, 230);
+    background(1);
+    stroke(#9d32a8);
     line(0, endZone, width, endZone);
     line(0, endZoneE, width, endZoneE);
     l1.display();
     l2.display();
     l3.display();
     l4.display();
+    stroke(#9c0505);
     textSize(50);
-    fill(1);
+    fill(#9d32a8);
     text("score: " + score, 25, 50);
     ticks++;
 
@@ -77,9 +79,8 @@ void draw() {
       }
     }
 
-    // Increase difficulty based on score
     if (score - sScore >= 1000) {
-      if (rate >= 30) {
+      if (rate >= 10) {
         rate -= 5;
         sScore += 1000;
       }
@@ -98,10 +99,10 @@ void draw() {
     }
     text("high score: " + hiScore, 350, 520);
     fill(#ffffff);
-    textSize(100);
-    text("Press any key to restart!", 50, 600);
+    textSize(90);
+    text("Press any key to restart!", 45, 600);
     fill(#78ffeb);
-    text("Press any key to restart!", 55, 605);
+    text("Press any key to restart!", 49, 603);
   }
 }
 
@@ -131,7 +132,7 @@ void keyPressed() {
       for (int i = Clist.size() - 1; i >= 0; i--) {
         Circle c = Clist.get(i);
         if (c.lane == l && c.y >= endZone && c.y <= endZoneE) {
-          score += 200;
+          score += 100;
           Clist.remove(i);
           hit = true;
           break; 
