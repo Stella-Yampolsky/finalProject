@@ -3,8 +3,8 @@ Lane l1, l2, l3, l4;
 float rate;
 float ticks;
 float r;
-float endZone = 600;
-float endZoneE = 700;
+float endZone;
+float endZoneE;
 int score;
 int sScore;
 int hiScore;
@@ -13,12 +13,13 @@ int state;
 boolean start;
 
 void setup() {
+  surface.setResizable(true);
   size(1000, 800);
   Clist = new ArrayList<Circle>();
-  l1 = new Lane(125, endZone, endZoneE, 1);
-  l2 = new Lane(375, endZone, endZoneE, 2);
-  l3 = new Lane(625, endZone, endZoneE, 3);
-  l4 = new Lane(875, endZone, endZoneE, 4);
+  l1 = new Lane(width/8, endZone, endZoneE, 1);
+  l2 = new Lane(width/8 + width /4, endZone, endZoneE, 2);
+  l3 = new Lane(width/8 + 2*width/4, endZone, endZoneE, 3);
+  l4 = new Lane(width/8 + 3*width/4, endZone, endZoneE, 4);
   score = 0;
   sScore = 0;
   hiScore = 0;
@@ -27,6 +28,8 @@ void setup() {
   state = 0;
   speed = 2.0;
   start = false;
+  endZone = height - 200;
+  endZoneE = height - 100;
 }
 
 void draw() {
