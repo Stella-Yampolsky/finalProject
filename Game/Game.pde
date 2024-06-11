@@ -14,7 +14,7 @@ boolean start;
 
 void setup() {
   surface.setResizable(true);
-  size(1000, 800);
+  size(750, 600);
   Clist = new ArrayList<Circle>();
   l1 = new Lane(width/8, endZone, endZoneE, 1);
   l2 = new Lane(width/8 + width /4, endZone, endZoneE, 2);
@@ -82,30 +82,30 @@ void draw() {
       }
     }
 
-    if (score - sScore >= 1000) {
+    if (score - sScore >= 500) {
       if (rate >= 10) {
         rate -= 5;
-        sScore += 1000;
+        sScore += 500;
       }
       speed += 0.05;
     }
   } else if (state == 3) {
     background(1);
     fill(#FF0000);
-    textSize(200);
-    text("Game Over", 25, 300);
+    textSize(150);
+    text("Game Over", 25, 150);
     textSize(50);
     fill(#FFFFFF);
-    text("final score: " + score, 350, 450);
+    text("final score: " + score, 225, 225);
     if (score > hiScore) {
       hiScore = score;
     }
-    text("high score: " + hiScore, 350, 520);
+    text("high score: " + hiScore, 225, 315);
     fill(#ffffff);
-    textSize(90);
-    text("Press any key to restart!", 45, 600);
+    textSize(75);
+    text("Press any key to restart!", 5, 450);
     fill(#78ffeb);
-    text("Press any key to restart!", 49, 603);
+    text("Press any key to restart!", 9, 451);
   }
 }
 

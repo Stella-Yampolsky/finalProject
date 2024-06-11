@@ -17,11 +17,11 @@ class Circle{
   
   void display(){
     fill(#fafafa);
-    circle(lane.getX(), y, 100 );
+    circle(lane.x, y, 100 );
     fill(c);
-    circle(lane.getX(), y, 65);
+    circle(lane.x, y, 65);
     fill(0);
-    circle(lane.getX(), y, 30);
+    circle(lane.x, y, 30);
   }
   
   boolean press(){

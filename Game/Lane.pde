@@ -9,19 +9,7 @@ class Lane{
     touchY = tY;
     touchYE = tYE;
     label = l;
-  }
-  
-  int getX(){
-    return x;
-  }
-
-  float gettY(){
-    return touchY;
-  }
-  int getLabel(){
-    return label;
-  }
-  
+  }  
   void display(){
     stroke(#9d32a8);
     line(x + width/8, 0, x+width/8, height);
