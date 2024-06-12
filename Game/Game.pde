@@ -11,15 +11,18 @@ int hiScore;
 float speed;
 int state;
 boolean start;
+color[] colors;
+String[] colorNames;
+int currentColorIndex;
 
 void setup() {
   surface.setResizable(true);
-  size(750, 600);
+  size(500, 400);
   Clist = new ArrayList<Circle>();
-  l1 = new Lane(width/8, endZone, endZoneE, 1);
-  l2 = new Lane(width/8 + width /4, endZone, endZoneE, 2);
-  l3 = new Lane(width/8 + 2*width/4, endZone, endZoneE, 3);
-  l4 = new Lane(width/8 + 3*width/4, endZone, endZoneE, 4);
+  l1 = new Lane(width / 8, endZone, endZoneE, 1);
+  l2 = new Lane(width / 8 + width / 4, endZone, endZoneE, 2);
+  l3 = new Lane(width / 8 + 2 * width / 4, endZone, endZoneE, 3);
+  l4 = new Lane(width / 8 + 3 * width / 4, endZone, endZoneE, 4);
   score = 0;
   sScore = 0;
   hiScore = 0;
@@ -27,22 +30,23 @@ void setup() {
   ticks = 0;
   state = 0;
   speed = 2.0;
-  start = false;
   endZone = height - 200;
   endZoneE = height - 100;
+  colors = new color[]{#78ffeb, #ff00ff, #ffff00, #ff0000};
+  colorNames = new String[]{"Cyan", "Pink", "Yellow", "Red"};
+  currentColorIndex = 0;
 }
 
 void draw() {
   if (state == 0) {
-    // Start screen
     background(1);
     fill(#ffffff);
-    textSize(100);
-    text("Press any key to start!", 50, 200);
+    textSize(0.125 * height);
+    textAlign(CENTER, CENTER);
+    text("Press any key to start!", width / 2, height / 2);
     fill(#78ffeb);
-    text("Press any key to start!", 55, 205);
+    text("Press any key to start!", width / 2 + 2, height / 2 + 3);
   } else if (state == 1) {
-    // Game screen
     background(1);
     stroke(#9d32a8);
     line(0, endZone, width, endZone);
@@ -52,9 +56,10 @@ void draw() {
     l3.display();
     l4.display();
     stroke(#9c0505);
-    textSize(50);
+    textSize(0.125 * height);
     fill(#9d32a8);
-    text("score: " + score, 25, 50);
+    textAlign(LEFT, TOP);
+    text("score: " + score, 25, 25);
     ticks++;
 
     if (ticks >= rate) {
@@ -71,12 +76,11 @@ void draw() {
       ticks = 0;
     }
 
-
     for (int i = Clist.size() - 1; i >= 0; i--) {
       Circle c = Clist.get(i);
       c.display();
       c.move();
-      if (c.y > height) {
+      if (c.y > endZoneE) {
         Clist.remove(i);
         state = 3;
       }
@@ -84,50 +88,70 @@ void draw() {
 
     if (score - sScore >= 500) {
       if (rate >= 10) {
-        rate -= 5;
+        rate -= 10;
         sScore += 500;
       }
-      speed += 0.05;
+      speed += 0.5;
     }
-  } else if (state == 3) {
+  } 
+  else if (state == 3) {
     background(1);
     fill(#FF0000);
-    textSize(150);
-    text("Game Over", 25, 150);
-    textSize(50);
+    textSize(0.125 * height);
+    textAlign(CENTER, CENTER);
+    text("Game Over", width / 2, height / 6);
+    textSize(0.075 * height);
     fill(#FFFFFF);
-    text("final score: " + score, 225, 225);
+    text("final score: " + score, width / 2, height / 2 - 90);
     if (score > hiScore) {
       hiScore = score;
     }
-    text("high score: " + hiScore, 225, 315);
+    text("high score: " + hiScore, width / 2, height / 2 - 30);
     fill(#ffffff);
-    textSize(75);
-    text("Press any key to restart!", 5, 450);
+    textSize(0.125 * height);
+    text("Press any key to restart!", width / 2, 0.53 * height);
     fill(#78ffeb);
-    text("Press any key to restart!", 9, 451);
+    text("Press any key to restart!", width / 2 + 2, 0.53 * height + 2);
+
+    fill(#fafafa);
+    circle(width / 2, height - 100, 75);
+    fill(colors[currentColorIndex]);
+    circle(width / 2, height - 100, 48.75);
+    fill(0);
+    circle(width / 2, height - 100, 22.5);
+    fill(#ffffff);
+    textSize(0.05 * height);
+    text(colorNames[currentColorIndex], width / 2, height - 50);
+    text("Press 'C' to cycle through colors", width / 2, height - 30);
   }
 }
 
 void keyPressed() {
   if (state == 0 || state == 3) {
-    state = 1;
-    score = 0;
-    ticks = 0;
-    speed = 2.0;
-    rate = 100;
-    Clist.clear();
-    start = true;
+    if (state == 3 && keyCode == 'C') {
+      currentColorIndex = (currentColorIndex + 1) % colors.length;
+    } 
+    else {
+      state = 1;
+      score = 0;
+      ticks = 0;
+      speed = 2.0;
+      rate = 100;
+      Clist.clear();
+    }
   } else if (state == 1) {
     int lane = key - '0';
     Lane l = null;
     if (lane == 1) {
       l = l1;
-    } else if (lane == 2) {
+    } 
+    else if (lane == 2) {
       l = l2;
-    } else if (lane == 3) {
+    } 
+    else if (lane == 3) {
       l = l3;
-    } else if (lane == 4) {
+    } 
+    else if (lane == 4) {
       l = l4;
     }
     boolean hit = false;
@@ -138,11 +162,11 @@ void keyPressed() {
           score += 100;
           Clist.remove(i);
           hit = true;
-          break; 
+          break;
         }
       }
       if (!hit) {
-        state = 3; 
+        state = 3;
       }
     }
   }
