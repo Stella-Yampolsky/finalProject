@@ -30,6 +30,7 @@ void setup() {
   ticks = 0;
   state = 0;
   speed = 2.0;
+  start = false;
   endZone = height - 200;
   endZoneE = height - 100;
   colors = new color[]{#78ffeb, #ff00ff, #ffff00, #ff0000};
@@ -136,6 +137,7 @@ void keyPressed() {
       score = 0;
       ticks = 0;
       speed = 2.0;
+      start = true;
       rate = 100;
       Clist.clear();
     }
